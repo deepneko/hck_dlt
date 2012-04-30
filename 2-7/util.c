@@ -2,7 +2,7 @@ void int2binary(int x, char* c)
 {
 	 int bit = 1;
 	 int i;
-	 int bitsize = sizeof(c);
+	 int bitsize = sizeof(int) * 8;
 	 
 	 for(i=bitsize-1; i>=0; i--){
 		  if(x & bit)
