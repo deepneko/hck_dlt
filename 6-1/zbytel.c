@@ -44,9 +44,19 @@ int zbytel2(unsigned int x)
 	 return n;
 }
 
+int search_word(unsigned int x, int word){
+	 int temp = 0;
+	 temp += word<<24;
+	 temp += word<<16;
+	 temp += word<<8;
+	 temp += word;
+	 printf("temp hex:0x%x\n", temp);
+	 return zbytel2(x^temp);
+}
+
 int main(int argc, char** argv)
 {
-	 if(argc != 2)
+	 if(argc != 2 && argc != 3)
 		  exit(0);
 	 
 	 int x = atoi(argv[1]);
@@ -59,4 +69,12 @@ int main(int argc, char** argv)
 
 	 printf("find leftmost 0-byte:%d\n", zbytel1(x));
 	 printf("find leftmost 0-byte:%d\n", zbytel2(x));
+
+	 if(argc == 3){
+		  int word = atoi(argv[2]);
+		  printf("word hex:0x%x\n", word);
+		  if(word > 0xFF)
+			   exit(0);
+		  printf("search word:%d\n", search_word(x, word));
+	 }
 }
